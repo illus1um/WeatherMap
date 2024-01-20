@@ -29,17 +29,18 @@ document.getElementById("weatherForm").addEventListener("submit", async function
       zoom: 3,
     });
 
-    popup
-      .setLngLat(data.coordinates)
-      .setHTML(
+    const timezoneData = data.timezoneData;
+    const currentTime = new Date(data.weatherData.dt * 1000 + timezoneData.gmtOffset * 1000 - 3 * 60 * 60 * 1000);
+
+    popup.setLngLat(data.coordinates).setHTML(
         `<h1>${cityName}</h1><p>Temperature: ${data.weatherData.main.temp}°C</p>
           <img src="${data.weatherIconUrl}" alt="Weather Icon">
-          <p>Timezone: ${data.timezoneData.zoneName}</p>
-          <p>Current Time: ${new Date(data.timezoneData.timestamp * 1000).toLocaleTimeString()}</p>`
-      )
-      .addTo(map);
+          <p>Timezone: ${timezoneData.zoneName}</p>
+          <p>Current Time: ${currentTime.toLocaleTimeString()}</p>`
+      ).addTo(map);
 
     const weatherInfo = document.getElementById("weather-info");
+
     weatherInfo.innerHTML = `<h2>Weather in ${cityName}</h2>
           <p>Temperature: ${data.weatherData.main.temp}°C (Feels like: ${data.weatherData.main.feels_like}°C)</p>
           <img src="${data.weatherIconUrl}" alt="Weather Icon">
