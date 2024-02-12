@@ -1,33 +1,13 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    unique: true,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  isAdmin: {
-    type: Boolean,
-    default: false
-  }
+  username: { type: String, required: true },
+  password: { type: String, required: true },
+  isAdmin: { type: Boolean, default: false },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+  deletedAt: { type: Date, default: null },
 });
-
-userSchema.pre('save', async function(next) {
-  const user = this;
-  if (user.isModified('password')) {
-    user.password = await bcrypt.hash(user.password, 10);
-  }
-  next();
-});
-
-userSchema.methods.comparePassword = async function(password) {
-  return await bcrypt.compare(password, this.password);
-};
 
 const User = mongoose.model('User', userSchema);
 

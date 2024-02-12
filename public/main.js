@@ -10,7 +10,7 @@ const map = new mapboxgl.Map({
 const popup = new mapboxgl.Popup({ closeOnClick: false });
 
 document.getElementById("weatherForm").addEventListener("submit", async function (event) {
-    event.preventDefault();
+    event.preventDefault(); 
     const formData = new FormData(this);
     const cityName = formData.get("city");
 
@@ -30,7 +30,7 @@ document.getElementById("weatherForm").addEventListener("submit", async function
     });
 
     const timezoneData = data.timezoneData;
-    const currentTime = new Date(data.weatherData.dt * 1000 + timezoneData.gmtOffset * 1000 - 3 * 60 * 60 * 1000);
+    const currentTime = new Date(data.weatherData.dt * 1000 + timezoneData.gmtOffset * 1000 - (3 * 60 * 60 * 1000) * 2);
 
     popup.setLngLat(data.coordinates).setHTML(
         `<h1>${cityName}</h1><p>Temperature: ${data.weatherData.main.temp}°C</p>

@@ -13,18 +13,38 @@ body {
   width: 72.5%;
 }
 
+#user {
+  text-align: center;
+  color: #fff;
+}
+
 #form-container {
   position: absolute;
   top: 20px;
   left: 75%;
-  padding: 20px;
-  width: 20%;
+  padding: 15px;
+  width: 20%; 
   background-color: #333;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
+a:link {
+  text-decoration: none;
+}
 
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
 #weatherForm {
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
 }
@@ -66,4 +86,30 @@ button:hover {
 
 #weather-info p {
   margin-bottom: 10px;
+}
+
+#history {
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #829ba1;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+#history:hover{
+  background-color: #839292;
+}
+
+#logout {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #d71b15;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+#logout:hover {
+  background-color: #d43f3f;
 }

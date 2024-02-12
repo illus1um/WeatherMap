@@ -4,13 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/admin.css">
 </head>
 <body>
-    <h1>Admin Panel</h1>
-    <ul>
-        <% users.forEach(user => { %>
-            <li><%= user.username %></li>
-        <% }) %>
-    </ul>
+    <div class="container">
+        <h1 class="mt-5">Admin Panel</h1> <a href="/logout">Log out from Admin</a>
+        <form action="/addUser" method="POST" class="mt-3">
+            <div class="form-row">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Username" name="username" required>
+                </div>
+                <div class="col">
+                    <input type="password" class="form-control" placeholder="Password" name="password" required>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Add User</button>
+                </div>
+            </div>
+        </form>
+        <ul class="user-list mt-3">
+            <% users.forEach(user => { %>
+                <li>
+                    <%= user.username %>
+                    <span class="ml-2 text-muted">Created: <%= user.createdAt.toLocaleString() %></span>
+                    <span class="ml-2 text-muted">Updated: <%= user.updatedAt ? user.updatedAt.toLocaleString() : 'N/A' %></span>
+                    <% if (user.isAdmin) { %>
+                        <span class="badge badge-warning ml-2">Admin</span>
+                    <% } %>
+                    <% if (!user.isAdmin) { %>
+                        <a href="/deleteUser/<%= user._id %>" class="btn btn-danger btn-action">Delete</a>
+                        <a href="/editUser/<%= user._id %>" class="btn btn-info btn-action">Edit</a>
+                    <% } %>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+    <footer>
+        <h5 style="color: rgb(148, 148, 148); text-align: center;">Yaki Meyrambek. SE-2205</h5>
+    </footer>
 </body>
 </html>

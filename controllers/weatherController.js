@@ -1,6 +1,7 @@
 const mapboxService = require("../services/mapboxService");
 const openWeatherService = require("../services/openWeatherService");
 const timezoneService = require('../services/timezoneService');
+const searchHistoryController = require('./searchHistoryController');
 
 exports.getWeather = async (req, res) => {
   try {
@@ -10,6 +11,8 @@ exports.getWeather = async (req, res) => {
     const weatherIconCode = weatherData.weather[0].icon;
     const weatherIconUrl = `http://openweathermap.org/img/wn/${weatherIconCode}.png`;
     const timezoneData = await timezoneService.getTimezone(coordinates);
+
+    await searchHistoryController.saveSearch(city, coordinates, weatherData);
 
     res.json({
       coordinates,

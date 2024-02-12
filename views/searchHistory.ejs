@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search History</title>
+    <link rel="stylesheet" href="/history.css">
+</head>
+<body>
+    <h1>Search History</h1> 
+    <h5 style="color: rgb(148, 148, 148);">Yaki Meyrambek. SE-2205</h5>
+    <button onclick="clearHistory()">Clear History</button>
+    <a href="/home">Go Back</a>
+    <ul>
+        <% searchHistory.forEach(search => { %>
+            <li>
+                <strong>City:</strong> <%= search.city %><br>
+                <strong>Coordinates:</strong> <%= search.coordinates %><br>
+                <strong>Weather Data:</strong> <br>
+            
+                Temperature: <%= search.weatherData.main.temp %>°C <br>
+                Feels like: <%= search.weatherData.main.feels_like %>°C <br>
+                Description: <%= search.weatherData.weather[0].description %> <br>
+                Humidity: <%= search.weatherData.main.humidity %>% <br>
+                Pressure: <%= search.weatherData.main.pressure %> hPa <br>
+                Wind Speed: <%= search.weatherData.wind.speed %> m/s <br>
+                
+                <strong>Search Time:</strong> <%= search.createdAt %>
+            </li>
+        <% }); %>
+    </ul>
+
+    <script>
+        function clearHistory() {
+            if (confirm('Are you sure you want to clear your search history?')) {
+                fetch('/clear-history', {
+                    method: 'DELETE'
+                })
+                .then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    }
+                })
+                .catch(error => console.error('Error clearing history:', error));
+            }
+        }
+    </script>
+</body>
+</html>

@@ -23,15 +23,28 @@
     <script defer src="/main.js"></script>
   </head>
   <body>
+    
     <div id="form-container">
+      <div id="user">
+        <% if (user) { %>
+            <h2>Welcome, <%= user.username %>!</h2>
+            <button onclick="window.location.href='/logout'" id="logout">Logout</button>
+        <% } else { %>
+            <h2>Please register and login to website.</h2>
+            
+            <button onclick="window.location.href='/'">Login</button>
+        <% } %>
+     </div>
       <form id="weatherForm">
         <label for="city">Enter City:</label>
         <input type="text" id="city" name="city" required placeholder="type here..."/>
-        <button type="submit">Get Weather</button>
+        <button type="submit">Get Weather</button> 
+        <button onclick="window.location.href='/search-history'" id="history">History</button>
       </form>
       
       <div id="weather-info"></div>
       <h5 style="color: rgb(148, 148, 148); text-align: center;">Yaki Meyrambek. SE-2205</h5>
+      
     </div>
     <div id="map"></div>
   </body>

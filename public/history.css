@@ -1,0 +1,40 @@
+body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: "Roboto Mono", monospace;
+    padding: 20px;
+}
+
+h1 {
+    color: #ffffff;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #333;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+strong {
+    color: #2aa031;
+}
+
+button {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #d71b15;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+  
+button:hover {
+    background-color: #d43f3f;
+}
+  
